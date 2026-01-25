@@ -115,9 +115,9 @@ def connect_mqtt():
     
     try:
         client.connect()
-        client.subscribe(TOPIC_SUB, qos=2)  # QoS 2 for reliable delivery
+        client.subscribe(TOPIC_SUB, qos=0)  # QoS 0 for standard umqtt compatibility
         print(" Connected!")
-        print(f"Subscribed to: {TOPIC_SUB} (QoS 2)")
+        print(f"Subscribed to: {TOPIC_SUB} (QoS 0)")
         return client
     except Exception as e:
         print(f" Failed: {e}")
@@ -180,9 +180,9 @@ def main():
                 # Visual indicators
                 irrigation_status = "🌱 ACTIVE" if irrigation_active else "⏸️ OFF"
                 print(f"📊 Temp: {temp}°C | Humidity: {hum}% | Irrigation: {irrigation_status}")
-                print(f"   Publishing to {TOPIC_PUB} (QoS 2)")
+                print(f"   Publishing to {TOPIC_PUB} (QoS 0)")
                 
-                client.publish(TOPIC_PUB, msg, qos=2)
+                client.publish(TOPIC_PUB, msg, qos=0)
                 last_publish = current_time
             
             time.sleep(0.1)  # Small delay to prevent busy loop
