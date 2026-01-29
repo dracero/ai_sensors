@@ -11,4 +11,6 @@ dependencies = [
     "mcp",
     "httpx",
     "nest_asyncio",
+    "matplotlib>=3.10.8",
+    "numpy>=2.4.0",
 ]
