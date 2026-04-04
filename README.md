@@ -56,7 +56,7 @@ Este proyecto implementa un sistema de riego inteligente que:
                     │ Provee datos                                │
                     │                                             │
             ┌───────▼─────────────────────────────────────────────┴────────┐
-            │              ORCHESTRATOR AGENT (Gemini 2.0)                 │
+            │              ORCHESTRATOR AGENT (Gemini 2.5)                 │
             │                                                               │
             │  • Evalúa condiciones (Temp > 25°C, Humedad < 50%)           │
             │  • Consulta pronóstico del clima                             │
@@ -111,7 +111,7 @@ Servidor que actúa como puente entre MQTT y los agentes ADK:
 Agente ADK especializado en comunicación MQTT:
 
 - **Archivo**: `mqtt_agent/agent.py`
-- **Modelo**: Gemini 2.0 Flash
+- **Modelo**: Gemini 2.5 Flash
 - **Función**: Envía comandos de riego al ESP32
 - **Herramientas**:
   - `send_irrigation_command(command)`: Envía "regar", "no_regar" o "reset"
@@ -122,7 +122,7 @@ Agente ADK especializado en comunicación MQTT:
 Agente que conecta con servidores MCP externos:
 
 - **Archivo**: `mcp_agent/agent.py`
-- **Modelo**: Gemini 2.0 Flash
+- **Modelo**: Gemini 2.5 Flash
 - **Función**: Consulta pronóstico del clima
 - **Servidor externo**: `external_mcp_server/MCP-main/weather.py`
 - **API**: National Weather Service (NWS) de EE.UU.
@@ -134,7 +134,7 @@ Agente que conecta con servidores MCP externos:
 Agente principal que coordina todo el sistema:
 
 - **Archivo**: `orchestrator_agent/agent.py`
-- **Modelo**: Gemini 2.0 Flash
+- **Modelo**: Gemini 2.5 Flash
 - **Función**: Toma decisiones inteligentes de riego
 - **Herramientas**:
   - `evaluate_irrigation_need()`: Evalúa si se necesita regar
@@ -676,7 +676,7 @@ ESP32          MQTT Broker      MCP Sensor     Orchestrator    MCP Agent      MQ
    ┌────────────────┐
    │ Orchestrator   │ ──► Lee datos del sensor
    │ Agent          │ ──► Consulta pronóstico
-   │ (Gemini 2.0)   │ ──► Aplica lógica de decisión
+   │ (Gemini 2.5)   │ ──► Aplica lógica de decisión
    └────────┬───────┘     ──► Genera comando
             │
             ▼
@@ -716,7 +716,7 @@ ESP32          MQTT Broker      MCP Sensor     Orchestrator    MCP Agent      MQ
 
 ┌─────────────────────────────────────────────────────────────────────┐
 │                         ORCHESTRATOR AGENT                          │
-│                        (Gemini 2.0 Flash)                           │
+│                        (Gemini 2.5 Flash)                           │
 │                                                                     │
 │  Rol: Coordinador principal y tomador de decisiones                │
 │                                                                     │
@@ -736,7 +736,7 @@ ESP32          MQTT Broker      MCP Sensor     Orchestrator    MCP Agent      MQ
                      │                            │
         ┌────────────▼──────────┐    ┌────────────▼──────────┐
         │     MQTT AGENT        │    │     MCP AGENT         │
-        │  (Gemini 2.0 Flash)   │    │  (Gemini 2.0 Flash)   │
+        │  (Gemini 2.5 Flash)   │    │  (Gemini 2.5 Flash)   │
         │                       │    │                       │
         │  Rol: Comunicación    │    │  Rol: Datos externos  │
         │  con ESP32            │    │  (Clima)              │
@@ -766,6 +766,6 @@ ESP32          MQTT Broker      MCP Sensor     Orchestrator    MCP Agent      MQ
 
 1. **Separación de responsabilidades**: Cada agente tiene un rol específico
 2. **Comunicación mediante herramientas**: Los agentes se comunican a través de function calls
-3. **Modelo unificado**: Todos usan Gemini 2.0 Flash
+3. **Modelo unificado**: Todos usan Gemini 2.5 Flash
 4. **Escalabilidad**: Fácil agregar nuevos agentes o herramientas
 
